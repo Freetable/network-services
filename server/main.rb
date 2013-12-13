@@ -8,10 +8,6 @@
 
 require 'sinatra'
 require 'sinatra/reloader' if development?
-# All of our POST's
-
-
-# All of our GET's
-get '/' do
-  '/'
+get '*' do
+	redirect to('/')
 end
