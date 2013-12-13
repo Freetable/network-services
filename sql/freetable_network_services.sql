@@ -15,12 +15,17 @@ DROP TABLE IF EXISTS `Freetable`.`users` ;
 CREATE TABLE IF NOT EXISTS `Freetable`.`users` (
   `WWUSERID` CHAR(128) NOT NULL ,
   `email` VARCHAR(96) NOT NULL DEFAULT '' ,
+  `email_public` BOOL DEFAULT FALSE,
   `nickname` VARCHAR(32) NOT NULL DEFAULT '' ,
   `password` VARCHAR(128) NOT NULL DEFAULT '' COMMENT 'SHA512' ,
   `first_name` VARCHAR(32) NOT NULL DEFAULT '' ,
+  `first_name_public` BOOL DEFAULT FALSE,
   `last_name` VARCHAR(32) NOT NULL DEFAULT '' ,
+  `last_name_public` BOOL DEFAULT FALSE,
   `short_description` VARCHAR(1024) NOT NULL DEFAULT '' ,
+  `short_description_public` BOOL DEFAULT FALSE,
   `long_description` TEXT,
+	`long_description_public BOOL DEFAULT FALSE,
   `avatar_blob` BLOB NULL ,
   `avatar_type` VARCHAR(3) NULL COMMENT 'file extension' ,
   `sprite_pallet_blob` BLOB NULL ,
@@ -42,6 +47,19 @@ CREATE TABLE IF NOT EXISTS `Freetable`.`users_to_urls` (
   `icon` VARCHAR(384) NOT NULL ,
   `link` VARCHAR(384) NOT NULL ,
   PRIMARY KEY (`WWUSERID`) ,
+  FOREIGN KEY (`WWUSERID`) REFERENCES `Freetable`.`users` (`WWUSERID`) )
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `Freetable`.`users_favorites`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `Freetable`.`users_favorites` ;
+
+CREATE TABLE IF NOT EXISTS `Freetable`.`users_favorites` (
+  `WWUSERID` CHAR(128) NOT NULL ,
+  `url` VARCHAR(384) NOT NULL ,
+  PRIMARY KEY (`WWUSERID`, `url`) ,
   FOREIGN KEY (`WWUSERID`) REFERENCES `Freetable`.`users` (`WWUSERID`) )
 ENGINE = InnoDB;
 
