@@ -1,13 +1,8 @@
-# Additional MIME types that you'd like nginx to handle go in here
 types {
     text/csv                    csv;
 }
 
 upstream gatekeeper {
-#  server unix:/var/www/discourse/tmp/sockets/thin.0.sock;
-#  server unix:/var/www/discourse/tmp/sockets/thin.1.sock;
-#  server unix:/var/www/discourse/tmp/sockets/thin.2.sock;
-#  server unix:/var/www/discourse/tmp/sockets/thin.3.sock;
 	 server localhost:9292;
 }
 
@@ -21,6 +16,8 @@ server {
   server_name gatekeeper-x.freetable.info;
 
   sendfile on;
+  tcp_nopush on;
+  tcp_nodelay on;
 
   keepalive_timeout 65;
 
@@ -32,6 +29,7 @@ server {
 
   location / {
     root $public;
+		expires 1h;
 
     location ~ ^/assets/ {
       expires 1y;
@@ -40,13 +38,13 @@ server {
       break;
     }
 
-    try_files $uri @freetable;
+
+    location ~ ^/api/ {
+    	try_files $uri @freetable;
+    }
   }
 
-  location /downloads/ {
-    internal;
-    alias $public/;
-  }
+  
 
   location @freetable {
     proxy_set_header X-Real-IP $remote_addr;
