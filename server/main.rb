@@ -35,18 +35,18 @@ require 'pp'
 def query_database(sp_name, sp_data)
 	query = 'CALL #{sp_name}(';
 	sp_data.each do |ele|
-		case ele.type
+		case ele['type']
 			when 'number'
-						output = ele.value[/^(\d+)$/,1]
+						output = ele['value'][/^(\d+)$/,1]
 						query = query + "'#{output}', ";
 			when 'hex'
-            output = ele.value[/^([0-9a-f]+)$/,1]
+            output = ele['value'][/^([0-9a-f]+)$/,1]
             query = query + "'#{output}', ";
 			when 'hash'
-            output = ele.value[/^([0-9a-zA-Z]+)$/,1]
+            output = ele.['value'][/^([0-9a-zA-Z]+)$/,1]
             query = query + "'#{output}', ";
 			when 'string'
-            output = @@dbh.escape(ele.value)
+            output = @@dbh.escape(ele['value'])
             query = query + "'#{output}', ";
 		end
 	end
@@ -66,10 +66,11 @@ end
 # login
 # nickname, password incoming 
 post '/api/login' do
-#   return PP.pp(params, '')
+	query_database( 'validate_user', [{ "value"=>params['nickname'], "type"=>"string" },{ "value"=>params['password'], "type"=>"string" },{ "value"=>params['sessionid'], "type"=>"hex" }] ).to_json
 end
 
 post '/api/logout' do
+  query_database( 'invalidate_user', [{ "value"=>params['nickname'], "type"=>"string" }, { "value"=>params['sessionid'], "type"=>"hex" }] ).to_json
 end
 
 post '/api/create' do
