@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS `Freetable`.`users` ;
 
 CREATE TABLE IF NOT EXISTS `Freetable`.`users` (
   `WWUSERID` CHAR(128) NOT NULL ,
-	`join_date` DATE NOT NULL ,
+  `join_date` DATE NOT NULL ,
   `email` VARCHAR(96) NOT NULL DEFAULT '' ,
   `email_public` BOOL DEFAULT FALSE,
   `nickname` VARCHAR(32) NOT NULL DEFAULT '' ,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `Freetable`.`users` (
   `short_description` VARCHAR(1024) NOT NULL DEFAULT '' ,
   `short_description_public` BOOL DEFAULT FALSE,
   `long_description` TEXT,
-	`long_description_public BOOL DEFAULT FALSE,
+  `long_description_public` BOOL DEFAULT FALSE,
   `avatar_blob` BLOB NULL ,
   `avatar_type` VARCHAR(3) NULL COMMENT 'file extension' ,
   `sprite_pallet_blob` BLOB NULL ,
@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS `Freetable`.`users_favorites` ;
 CREATE TABLE IF NOT EXISTS `Freetable`.`users_favorites` (
   `WWUSERID` CHAR(128) NOT NULL ,
   `url` VARCHAR(384) NOT NULL ,
-  PRIMARY KEY (`WWUSERID`, `url`) ,
+  PRIMARY KEY (`WWUSERID`) ,
   FOREIGN KEY (`WWUSERID`) REFERENCES `Freetable`.`users` (`WWUSERID`) )
 ENGINE = InnoDB;
 
