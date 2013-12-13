@@ -13,11 +13,51 @@ require 'json'
 require 'mysql2'
 require 'pp'
 
-# MySql DB Hook when ready
+# MySql DB Hook and function when ready
 # In production, the SQL DB should be on it's own pool of machines, use RRDNS for :host for failover
 # Might be better to use no password and use access control lists instead here (Pondering this)
 
 # @@dbh = Mysql2::Client.new(:host => "localhost", :username => "ft-network-services", :database => "Freetable")
+# 
+# sp_data should be an array of hashes
+# [
+# 	{ value=>'', type=>'hex' },
+#   { value=>'', type=>'string' }
+# ]
+#
+# Type can be any of the following types:
+#
+# number   = 0-9
+# hex      = 0-9a-f
+# hash     = A-Za-z0-9
+# string   = A-Za-z0-9 _,-,!,@,#,$,%,^,&,*,(,),+,=,[,],{,},|,<,>,.,',"
+
+def query_database(sp_name, sp_data)
+	query = 'CALL #{sp_name}(';
+	sp_data.each do |ele|
+		case ele.type
+			when 'number'
+						output = ele.value[/^(\d+)$/,1]
+						query = query + "'#{output}', ";
+			when 'hex'
+            output = ele.value[/^([0-9a-f]+)$/,1]
+            query = query + "'#{output}', ";
+			when 'hash'
+            output = ele.value[/^([0-9a-zA-Z]+)$/,1]
+            query = query + "'#{output}', ";
+			when 'string'
+            output = @@dbh.escape(ele.value)
+            query = query + "'#{output}', ";
+		end
+	end
+
+  2.times { query[query.length-1] = '' }
+
+	query = query + ')'
+
+  return @@dbh.query(query)
+
+end
 
 # post for things we don't want cached, get for things we do
 
