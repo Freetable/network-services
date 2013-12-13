@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS `Freetable`.`users` ;
 
 CREATE TABLE IF NOT EXISTS `Freetable`.`users` (
   `WWUSERID` CHAR(128) NOT NULL ,
+	`join_date` DATE NOT NULL ,
   `email` VARCHAR(96) NOT NULL DEFAULT '' ,
   `email_public` BOOL DEFAULT FALSE,
   `nickname` VARCHAR(32) NOT NULL DEFAULT '' ,

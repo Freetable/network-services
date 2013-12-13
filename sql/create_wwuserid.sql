@@ -22,7 +22,7 @@ CREATE PROCEDURE create_wwuserid ()
     IF (SELECT count((SELECT WWUSERID FROM users WHERE WWUSERID = @hash))) = 0 THEN 
       BEGIN
       -- Try to create it
-	INSERT INTO users SET WWUSERID = @hash, nickname = @username;
+	INSERT INTO users SET WWUSERID = @hash, nickname = @username, join_date = NOW();
       END;
     ELSE
       BEGIN
