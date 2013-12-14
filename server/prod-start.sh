@@ -1,3 +1,3 @@
 #!/bin/bash
-puma -e production -q -w 4
+puma -e production -q -w 16 -d
 
