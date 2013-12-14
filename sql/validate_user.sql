@@ -12,10 +12,10 @@ BEGIN
 	SET sid = (SELECT create_random_hash(128));  
   SET p_hash = (SELECT password FROM users WHERE nickname = nnickname);
   
-	SET t_hash = SHA2(pass,512);
+	-- SET t_hash = SHA2(pass,512);
 
   -- When ready for the switch to SHA512 client side
-	-- SET t_hash = pass;  
+	SET t_hash = pass;  
 
   IF STRCMP(p_hash,t_hash) = 0 THEN 
     UPDATE users SET sessionid = sid WHERE nickname = nnickname;
