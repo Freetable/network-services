@@ -1,24 +1,27 @@
 DELIMITER $$
 
-DROP FUNCTION IF EXISTS validate_user$$
+DROP PROCEDURE IF EXISTS validate_user$$
 
-CREATE FUNCTION validate_user (nnickname VARCHAR(32), pass VARCHAR(128), ssessionid CHAR(128))
-
-RETURNS VARCHAR(255)
-DETERMINISTIC
+CREATE PROCEDURE validate_user (nnickname VARCHAR(32), pass VARCHAR(128))
 
 BEGIN
   DECLARE p_hash VARCHAR(128);
   DECLARE t_hash VARCHAR(128);
-    
+  DECLARE ssession_id = CHAR(128);
+
+	SET ssession_id = (SELECT create_random_hash(128));  
   SET p_hash = (SELECT password FROM users WHERE nickname = nnickname);
-  SET t_hash = SHA2(pass,512);
   
+	SET t_hash = SHA2(pass,512);
+
+  -- When ready for the switch to SHA512 client side
+	-- SET t_hash = pass;  
+
   IF STRCMP(p_hash,t_hash) = 0 THEN 
     UPDATE users SET sessionid = ssessionid WHERE nickname = nnickname;
-    RETURN (SELECT WWUSERID FROM users WHERE nickname = nnickname);
+    SELECT WWUSERID,sessionid FROM users WHERE nickname = nnickname;
   ELSE
-   RETURN '-1';
+    SELECT '-1';
   END IF;
   
 END$$

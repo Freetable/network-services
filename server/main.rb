@@ -17,7 +17,12 @@ require 'pp'
 # In production, the SQL DB should be on it's own pool of machines, use RRDNS for :host for failover
 # Might be better to use no password and use access control lists instead here (Pondering this)
 
-# @@dbh = Mysql2::Client.new(:host => "localhost", :username => "ft-network-services", :database => "Freetable")
+HOST_POOL = 'localhost'
+DB_USER   = 'ft-net-srv'
+DB_PASS   = '7f2eb44a0f8a1763ad9c3e15dd947bfc4dc04bdd'  # This is for example purposes only!
+DB_NAME   = 'Freetable'
+
+@@dbh = Mysql2::Client.new(:host => HOST_POOL, :username => DB_USER, :password => DB_PASS, :database => DB_NAME)
 # 
 # sp_data should be an array of hashes
 # [
@@ -43,7 +48,7 @@ def query_database(sp_name, sp_data)
             output = ele['value'][/^([0-9a-f]+)$/,1]
             query = query + "'#{output}', ";
 			when 'hash'
-            output = ele.['value'][/^([0-9a-zA-Z]+)$/,1]
+            output = ele['value'][/^([0-9a-zA-Z]+)$/,1]
             query = query + "'#{output}', ";
 			when 'string'
             output = @@dbh.escape(ele['value'])
@@ -53,7 +58,7 @@ def query_database(sp_name, sp_data)
 
   2.times { query[query.length-1] = '' }
 
-	query = query + ')'
+	query = query + ');'
 
   return @@dbh.query(query)
 
