@@ -38,7 +38,7 @@ DB_NAME   = 'Freetable'
 # string   = A-Za-z0-9 _,-,!,@,#,$,%,^,&,*,(,),+,=,[,],{,},|,<,>,.,',"
 
 def query_database(sp_name, sp_data)
-	query = 'CALL #{sp_name}(';
+	query = "CALL #{sp_name}(";
 	sp_data.each do |ele|
 		case ele['type']
 			when 'number'
@@ -59,9 +59,8 @@ def query_database(sp_name, sp_data)
   2.times { query[query.length-1] = '' }
 
 	query = query + ');'
-
-  return @@dbh.query(query)
-
+	logger.info query
+  results = @@dbh.query(query, :symbolize_keys => true, :cast_booleans => true)
 end
 
 # post for things we don't want cached, get for things we do
@@ -71,7 +70,9 @@ end
 # login
 # nickname, password incoming 
 post '/api/login' do
-	query_database( 'validate_user', [{ "value"=>params['nickname'], "type"=>"string" },{ "value"=>params['password'], "type"=>"string" },{ "value"=>params['sessionid'], "type"=>"hex" }] ).to_json
+	results = query_database( 'validate_user', [{ "value"=>params['nickname'], "type"=>"string" },{ "value"=>params['password'], "type"=>"string" }] )
+	# Whacky results....
+	results.each { |result| return result.to_json }
 end
 
 post '/api/logout' do
