@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     backports (3.3.5)
+    connection_pool (1.2.0)
     json (1.8.1)
     multi_json (1.8.2)
     mysql2 (0.3.14)
@@ -10,7 +11,6 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    sequel (4.5.0)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -30,9 +30,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  connection_pool
   json
   mysql2
-  sequel
   sinatra
   sinatra-contrib
   sinatra-respond_to
