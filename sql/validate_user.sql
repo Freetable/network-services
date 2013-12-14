@@ -7,7 +7,7 @@ CREATE PROCEDURE validate_user (nnickname VARCHAR(32), pass VARCHAR(128))
 BEGIN
   DECLARE p_hash VARCHAR(128);
   DECLARE t_hash VARCHAR(128);
-  DECLARE ssession_id = CHAR(128);
+  DECLARE ssession_id CHAR(128);
 
 	SET ssession_id = (SELECT create_random_hash(128));  
   SET p_hash = (SELECT password FROM users WHERE nickname = nnickname);
