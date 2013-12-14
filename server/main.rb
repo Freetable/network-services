@@ -10,8 +10,10 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'sinatra/respond_to'
 require 'json'
-require 'mysql2'
 require 'pp'
+require 'sequel'
+
+
 
 # MySql DB Hook and function when ready
 # In production, the SQL DB should be on it's own pool of machines, use RRDNS for :host for failover
@@ -22,70 +24,34 @@ DB_USER   = 'ft-net-srv'
 DB_PASS   = '7f2eb44a0f8a1763ad9c3e15dd947bfc4dc04bdd'  # This is for example purposes only!
 DB_NAME   = 'Freetable'
 
-@@dbh = Mysql2::Client.new(:host => HOST_POOL, :username => DB_USER, :password => DB_PASS, :database => DB_NAME)
-# 
-# sp_data should be an array of hashes
-# [
-# 	{ value=>'', type=>'hex' },
-#   { value=>'', type=>'string' }
-# ]
-#
-# Type can be any of the following types:
-#
-# number   = 0-9
-# hex      = 0-9a-f
-# hash     = A-Za-z0-9
-# string   = A-Za-z0-9 _,-,!,@,#,$,%,^,&,*,(,),+,=,[,],{,},|,<,>,.,',"
-
-def query_database(sp_name, sp_data)
-	query = "CALL #{sp_name}(";
-	sp_data.each do |ele|
-		case ele['type']
-			when 'number'
-						output = ele['value'][/^(\d+)$/,1]
-						query = query + "'#{output}', ";
-			when 'hex'
-            output = ele['value'][/^([0-9a-f]+)$/,1]
-            query = query + "'#{output}', ";
-			when 'hash'
-            output = ele['value'][/^([0-9a-zA-Z]+)$/,1]
-            query = query + "'#{output}', ";
-			when 'string'
-            output = @@dbh.escape(ele['value'])
-            query = query + "'#{output}', ";
-		end
-	end
-
-  2.times { query[query.length-1] = '' }
-
-	query = query + ');'
-	logger.info query
-  results = @@dbh.query(query, :symbolize_keys => true, :cast_booleans => true)
-end
+@@dbh = Sequel.mysql2(DB_NAME, :user => DB_USER, :password => DB_PASS, :host => HOST_POOL)
 
 # post for things we don't want cached, get for things we do
 
 # Post User Functions Start
 
 # login
-# nickname, password incoming 
+# nickname, password in 
+# wwuserid, sessionid out
 post '/api/login' do
-	results = query_database( 'validate_user', [{ "value"=>params['nickname'], "type"=>"string" },{ "value"=>params['password'], "type"=>"string" }] )
-	# Whacky results....
-	results.each { |result| return result.to_json }
+  @@dbh.fetch('CALL validate_user(?, ?)', params['nickname'], params['password']).all.to_json
 end
 
+# logout
+# wwuserid, sessionid in
+# nothing out
 post '/api/logout' do
-  query_database( 'invalidate_user', [{ "value"=>params['nickname'], "type"=>"string" }, { "value"=>params['sessionid'], "type"=>"hex" }] ).to_json
+  @@dbh.fetch('CALL invalidate_user(?, ?)', params['wwuserid'], params['sessionid']).all.to_json
 end
 
-post '/api/create' do
+# 
+post '/api/create_user' do
 end
 
 post '/api/forgot_password' do
 end
 
-post '/api/delete' do
+post '/api/delete_user' do
 end
 
 post '/api/set_nickname' do
