@@ -2,11 +2,10 @@
 # wwuserid, sessionid in
 # nothing out
 post '/api/logout' do
-  if(params['wwuserid'].nil? || params['sessionid'].nil?)
-    '-0'
-  else
-    query_db('invalidate_user',params['wwuserid'],params['sessionid']).to_json
-  end
+  my_fields = [ 'wwuserid', 'password' ]
+  values = []
+  my_fields.each { |field| return '-0' if(params[field].nil?) ; values.push(params[field]) }
+  query_db('invalidate_user', values).to_json
 end
 
 

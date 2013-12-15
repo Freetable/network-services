@@ -2,10 +2,9 @@
 # nickname, password in 
 # wwuserid, sessionid out
 post '/api/login' do
-  if(params['nickname'].nil? || params['password'].nil?) 
-  	'-0'
-  else
-  	query_db('validate_user',params['nickname'],params['password']).to_json
-	end
+  my_fields = [ 'nickname', 'password' ]
+  values = []
+  my_fields.each { |field| return '-0' if(params[field].nil?) ; values.push(params[field]) }
+  query_db('validate_user', values).to_json
 end
 

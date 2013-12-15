@@ -1,10 +1,11 @@
 def query_db( *args )
 sp = args.shift
+values = args.shift
 results = ''
 
 @@dbh_pool.with do |dbh|
 
-args.each { |arg| results += "'#{dbh.escape(arg)}', " }
+values.each { |value| results += "'#{dbh.escape(arg)}', " }
 
 2.times { results[results.length-1] = '' }
 
