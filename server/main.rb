@@ -6,7 +6,7 @@
 #
 ###############################################################################
 
-# Required Modules
+# Required modules
 
 require 'sinatra'
 require 'sinatra/reloader' if development?
@@ -18,7 +18,7 @@ require 'logger'
 require 'connection_pool'
 require 'sequel'
 
-# Constants import
+# Conf import
 
 require_relative('conf')
 
