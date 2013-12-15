@@ -2,13 +2,10 @@
 # nickname, password in 
 # wwuserid, sessionid out
 post '/api/login' do
-  results = ''
   if(params['nickname'].nil? || params['password'].nil?) 
-    results = '-2'
+  	'-0'
   else
-    @@dbh_pool.with { |dbh| results = dbh.query("CALL validate_user('#{dbh.escape(params['nickname'])}', '#{dbh.escape(params['password'])}')").to_a; reset_dbh(dbh) }
-  end
-  results.to_json
-
+  	query_db('validate_user',params['nickname'],params['password']).to_json
+	end
 end
 
