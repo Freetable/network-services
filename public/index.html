@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Freetable Signin</title>
+ 
+<link href="/assets/css/bootstrap.css" rel="stylesheet">
+ 
+<link href="/assets/css/signin.css" rel="stylesheet">
+ 
+<!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+ 
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+<style>body{background-image:url('/assets/img/gkbkgr.jpg');}</style>
+</head>
+<body id="body">
+<div class="container" style="height:50px"></div>
+<div class="container">
+<form class="form-signin" role="form">
+<h2 class="form-signin-heading text-primary" align="center">Welcome To Freetable</h2>
+<input id="nickname" type="text" class="form-control" placeholder="Username" required autofocus>
+<input id="password" type="password" class="form-control" placeholder="Password" required>
+<div class="col-md-12">
+<label class="checkbox text-primary">
+<input name="rememberme" type="checkbox" value="remember-me"> Remember me
+</label>
+</div>
+<div class="col-md-12">
+<button class="btn btn-primary btn-block" type="submit">Sign in</button>
+</div>
+<div class="col-md-12">&nbsp;</div>
+<div class="col-md-5">
+<button class="btn btn-primary btn-block" type="submit">New User</button>
+</div>
+<div class="col-md-7">
+<button class="btn btn-primary btn-block" type="submit">Forgot Password</button>
+</div>
+</form>
+</div>  
+ 
+   <script src="/assets/js/sha512.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/assets/js/jquery.cookie.js"></script> 
+    <script src="/assets/js/bootstrap.min.js"></script> 
+    <script>
+    $(function() {  
+      $(".btn").click(function() {  
+        // validate and process form here  
+    var dataString = 'nickname='+ $('#nickname').val() + '&password=' + CryptoJS.SHA512($('#password').val());  
+    //alert (dataString);return false;  
+    $.ajax({  
+      type: "POST",  
+      url: "/api/login", 
+      dataType: "json",
+      data: dataString,  
+      success: function( data ) {  
+        // $('#contact_form').html("<div id='message'></div>");  
+        // $('#message').html("<h2>Contact Form Submitted!</h2>")  
+        // .append("<p>We will be in touch soon.</p>")  
+        // .hide()  
+        // .fadeIn(1500, function() {  
+        //  $('#message').append("<img id='checkmark' src='images/check.png' />");  
+ 	data = data.shift();
+		if( typeof data['WWUSERID'] != 'undefined') {
+			$.cookie('WWUSERID', data['WWUSERID'], { expires: 30 });
+			$.cookie('sessionid', data['sessionid'], { expires: 30 });
+			window.location.replace("http://sinatra.freetable.info/main");
+		}else{
+		$('<div class="alert alert-danger">Invalid Login <button class="close" data-dismiss="alert" aria-hidden="true" type="button">&times;</a></div>').prependTo("#body");
+		}
+        }
+    });  
+    return false;  
+      });  
+    });  
+    </script>
+ 
+</body>
+</html>
