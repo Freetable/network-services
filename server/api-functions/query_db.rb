@@ -5,7 +5,7 @@ results = ''
 
 @@dbh_pool.with do |dbh|
 
-values.each { |value| results += "'#{dbh.escape(arg)}', " }
+values.each { |value| results += "'#{dbh.escape(value)}', " }
 
 2.times { results[results.length-1] = '' }
 

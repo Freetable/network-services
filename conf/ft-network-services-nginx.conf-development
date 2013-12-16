@@ -29,6 +29,7 @@ server {
 
   location / {
     root $public;
+		index index;
     # expires 1h;
     location ~ ^/assets/ {
       # expires 1y;
