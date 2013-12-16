@@ -23,10 +23,10 @@
 <body>
 <div class="container" style="height:50px"></div>
 <div class="container">
-<form class="form-signin" role="form" method="post" action="/api/login">
+<form class="form-signin" role="form">
 <h2 class="form-signin-heading text-primary" align="center">Welcome To Freetable</h2>
-<input name="nickname" type="text" class="form-control" placeholder="Username" required autofocus>
-<input name="password" type="password" class="form-control" placeholder="Password" required>
+<input id="nickname" type="text" class="form-control" placeholder="Username" required autofocus>
+<input id="password" type="password" class="form-control" placeholder="Password" required>
 <div class="col-md-12">
 <label class="checkbox text-primary">
 <input name="rememberme" type="checkbox" value="remember-me"> Remember me
@@ -45,6 +45,34 @@
 </form>
 </div>  
  
+   <script src="/assets/js/sha512.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script> 
+    <script>
+    $(function() {  
+      $(".btn").click(function() {  
+        // validate and process form here  
+    var dataString = 'nickname='+ $('#nickname').val() + '&password=' + CryptoJS.SHA512($('#password').val());  
+    //alert (dataString);return false;  
+    $.ajax({  
+      type: "POST",  
+      url: "/api/login",  
+      data: dataString,  
+      success: function( data ) {  
+        // $('#contact_form').html("<div id='message'></div>");  
+        // $('#message').html("<h2>Contact Form Submitted!</h2>")  
+        // .append("<p>We will be in touch soon.</p>")  
+        // .hide()  
+        // .fadeIn(1500, function() {  
+        //  $('#message').append("<img id='checkmark' src='images/check.png' />");  
+ 	console.log( data );
+        }
+    });  
+    return false;  
+      });  
+    });  
+    </script>
  
 </body>
 </html>
