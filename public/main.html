@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Freetable Signin</title>
+ 
+<link href="/assets/css/bootstrap.css" rel="stylesheet">
+ 
+<link href="/assets/css/signin.css" rel="stylesheet">
+ 
+<!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+ 
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+<style>body{background-image:url('/assets/img/gkbkgr.jpg');}</style>
+</head>
+<body id="body">
+<div class="conainter">Welcome to Freetable</div>  
+ 
+   <script src="/assets/js/sha512.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/assets/js/jquery.cookie.js"></script> 
+    <script src="/assets/js/bootstrap.min.js"></script> 
+    <script>
+		if( typeof $.cookie('WWUSERID') == 'undefined') {
+			window.location.replace("http://sinatra.freetable.info");
+		}else{
+		// Use Ajax to call validate user based on wwuserid + sessionid
+		// if we fail here it's another re-direct back to login
+		// window.location.replace("http://sinatra.freetable.info");
+		}
+    
+    </script>
+ 
+</body>
+</html>
