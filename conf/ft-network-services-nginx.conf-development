@@ -29,22 +29,22 @@ server {
 
   location / {
     root $public;
-		index index;
+
     # expires 1h;
     location ~ ^/assets/ {
       # expires 1y;
-      add_header Cache-Control public;
-      add_header ETag "";
+      # add_header Cache-Control public;
+      # add_header ETag "";
       break;
     }
-
 
     location ~ ^/api/ {
     	try_files $uri @freetable;
     }
-  }
 
-  
+    try_files $uri $uri/ @extensionless-html;
+
+  }
 
   location @freetable {
     proxy_set_header X-Real-IP $remote_addr;
@@ -53,6 +53,10 @@ server {
     proxy_set_header Host $http_host;
 
     proxy_pass http://gatekeeper;
+  }
+
+  location @extensionless-html {
+    rewrite ^(.*)$ $1.html last;
   }
 
 }
