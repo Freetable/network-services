@@ -16,20 +16,21 @@ Install Notes
 Technologies Used/Errata/Caveats
 =======
 
-MySql
+SQL
 =====
+Acceptable SQL servers:
+
 - http://www.percona.com/doc/percona-server/5.5/installation/apt_repo.html
 - https://mariadb.org/
 
 Other DBs are not supported: PostgreSQL, MSSQL and Oracle
 
-DB minimum requirements: 
+DB minimum requirements 
 =====
 - SHA2() functionality was added in MySQL 5.5.3, see: http://dev.mysql.com/doc/refman/5.5/en/encryption-functions.html#function_sha2
 
 Gotchas
 ======
-If you are getting this error:
 - Thread stack overrun: ? bytes used of a ? byte stack, and 128000 bytes needed. Use 'mysqld -O thread_stack=#' to specify a bigger stack.  Update your my.cnf (usually in /etc/mysql/) and change this line to (then /etc/init.d/mysql restart):  thread_stack = 256M
 
 Nginx
