@@ -2510,7 +2510,7 @@ fieldset[disabled] .btn-primary.active {
 
 .btn-warning {
   color: #ffffff;
-  background-color: background-color: rgba(221, 86, 0,0);
+  background-color: rgba(221, 86, 0, 0);
   border-color: #dd5600;
 }
 
