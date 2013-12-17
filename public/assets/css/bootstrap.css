@@ -38,11 +38,13 @@ html {
 }
 
 body {
+		background-color: black;
     background-image: url('/assets/img/gkbkgr.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+		background-repeat: no-repeat;
   margin: 0;
 }
 
