@@ -53,7 +53,7 @@ $(function() {
       $.cookie('sessionid', data['sessionid'], { expires: 30 });
       window.location.replace("main");
     }else{
-    $('<div class="alert alert-danger">Invalid Login <button class="close" data-dismiss="alert" aria-hidden="true" type="button">&times;</a></div>').prependTo("#body");
+    $('#error_message').text('Sign In Error');
     }
         
     });  

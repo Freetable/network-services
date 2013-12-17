@@ -28,6 +28,7 @@
 <h2 class="form-signin-heading text-info" align="center">Freetable Login</h2>
 <input id="nickname" type="text" class="form-control" placeholder="Username" autofocus>
 <input id="password" type="password" class="form-control" placeholder="Password">
+<h4 id="error_message" class="text-danger" align="middle">&nbsp;</h4>
 <div class="col-md-12">
 <button id="signin" class="btn btn-primary btn-block" type="submit">Sign in</button>
 </div>
@@ -45,6 +46,8 @@
     <script src="/assets/js/jquery.cookie.js"></script> 
     <script src="/assets/js/bootstrap.min.js"></script> 
     <script src="/assets/js/custom.js"></script> 
-		<script>login_verify_user();</script>
+
+    <!-- When we are in production, we use this line, in development, not so much yet -->
+		<!-- <script>login_verify_user();</script> -->
 </body>
 </html>
