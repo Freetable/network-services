@@ -25,11 +25,11 @@ server {
   client_max_body_size 16m;
 
   # path to discourse's public directory
-  set $public /srv/freetable-network-services/public;
+  set $public /srv/network-services/public;
 
   location / {
     root $public;
-		expires 1w;
+    expires 1w;
 
     location ~ ^/assets/ {
       expires 1y;
