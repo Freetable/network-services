@@ -15,7 +15,10 @@ require 'pp'
 require 'mysql2'
 require 'logger'
 require 'connection_pool'
+<<<<<<< HEAD
+=======
 require 'sequel'
+>>>>>>> 7e81ac3c7116dd2aa46cd9e92197db9c4ab55b07
 
 # Conf import
 require_relative('conf')
