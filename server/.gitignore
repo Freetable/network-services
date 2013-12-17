@@ -1,5 +1,5 @@
 puma.pid
 Gemfile.lock
-#puma
+puma
 conf.rb
 
