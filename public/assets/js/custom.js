@@ -1,6 +1,16 @@
 // Freetable custom.js
 
-function verify_user( uid, sid, callback ){ 
+function verify_user(){
+      real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
+      data = data.shift();
+      console.log(data);
+      if( typeof data['1'] == 'undefined' ) {
+      window.location.replace("/");
+      }
+    }); 
+}
+
+function real_verify_user( uid, sid, callback ){ 
     $.ajax({
       type: "POST",
       url: "./api/verify_user",
@@ -31,7 +41,7 @@ $(function() {
     if( typeof data['WWUSERID'] != 'undefined') {
       $.cookie('WWUSERID', data['WWUSERID'], { expires: 30 });
       $.cookie('sessionid', data['sessionid'], { expires: 30 });
-      window.location.("main");
+      window.location.replace("main");
     }else{
     $('<div class="alert alert-danger">Invalid Login <button class="close" data-dismiss="alert" aria-hidden="true" type="button">&times;</a></div>').prependTo("#body");
     }
