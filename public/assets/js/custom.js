@@ -1,5 +1,15 @@
 // Freetable custom.js
 
+function login_verify_user(){
+      real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
+      data = data.shift();
+      console.log(data);
+      if( typeof data['1'] != 'undefined' ) {
+      window.location.replace("/main");
+      }
+    });
+}
+
 function verify_user(){
       real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
       data = data.shift();
@@ -50,7 +60,15 @@ $(function() {
     return false;
 	});  
 
+$("#signup").click(function() {
+	window.location.assign("signup");
+  return false;
+	});
 
+$("#forgot").click(function() {
+  window.location.assign("forgot");
+  return false;
+  });
 
 
 });  
