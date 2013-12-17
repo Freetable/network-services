@@ -1,1 +1,3 @@
 puma.pid
+Gemfile.lock
+puma
