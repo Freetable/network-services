@@ -107,7 +107,14 @@ $("#resetpassword").click(function() {
   }
   return false;
   });
-});
+
+
+
+
+
+
+
+}); //End jQuery on document ready
  
 
 // Helpers
