@@ -15,6 +15,7 @@ require 'pp'
 require 'mysql2'
 require 'logger'
 require 'connection_pool'
+require 'mandrill' 
 
 # Conf import
 require_relative('conf')
