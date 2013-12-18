@@ -39,7 +39,7 @@ function login ( nickname, password, callback ){
 function forgot_pass ( nick_or_email, callback ){
     $.ajax({  
       type: "POST",  
-      url: "./api/forgot_password", 
+      url: "./api/recover_password", 
       dataType: "json",
       data: 'nick_or_email=' + nick_or_email,  
       success: callback
