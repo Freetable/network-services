@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Freetable Signin</title>
+<title>Freetable Signup</title>
 <link rel="stylesheet" href="/assets/css/font-awesome.min.css"> 
 <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <link href="/assets/css/bootstrap.css" rel="stylesheet">
@@ -21,24 +21,22 @@
     <![endif]-->
 </head>
 <body id="body">
-<div class="container" style="height:300px"></div>
+<div class="container" style="height:200px"></div>
 <div class="container col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3">
 <div class="container well col-md-8 col-md-offset-2">
-<h2 class="form-signin-heading text-info" align="center">Freetable Login</h2>
+<h2 class="form-signin-heading text-info" align="center">Create User</h2>
 <form class="form-signin" role="form">
-<input id="nickname" type="text" class="form-control" placeholder="Username" autofocus>
-<input id="password" type="password" class="form-control" placeholder="Password">
+<input id="nickname" type="text" class="form-control" placeholder="Username" autofocus autocomplete="off">
+<input id="email" type="email" class="form-control" placeholder="Email Address" autocomplete="off">
+<input id="firstname" type="email" class="form-control" placeholder="First Name" autocomplete="off">
+<input id="lastname" type="email" class="form-control" placeholder="Last Name" autocomplete="off">
+<input id="passworda" type="password" class="form-control" placeholder="Password" autocomplete="off">
+<input id="passwordb" type="password" class="form-control" placeholder="Password Again" autocomplete="off">
 <h4 id="error_message" class="text-muted" align="middle" style="font-weight:bold;">&nbsp;</h4>
 <div class="col-md-12">
-<button id="signin" class="btn btn-primary btn-block" type="submit">Sign in</button>
+<button id="signin" class="btn btn-primary btn-block" type="submit">Sign Up</button>
 </div>
 <div class="col-md-12">&nbsp;</div>
-<div class="col-md-5">
-<button id="signup" class="btn btn-primary btn-block" type="submit">New User</button>
-</div>
-<div class="col-md-7">
-<button id="forgot" class="btn btn-primary btn-block" type="submit">Forgot Password</button>
-</div>
 </form>
 </div>  
     <script src="/assets/js/sha512.js"></script>
