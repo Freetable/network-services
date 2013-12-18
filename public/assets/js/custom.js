@@ -46,6 +46,17 @@ function forgot_pass ( nick_or_email, callback ){
     });
 }
 
+function reset_pass ( uid, password, sid, callback ){
+    $.ajax({
+      type: "POST",
+      url: "./api/set_password",
+      dataType: "json",
+      data: 'wwuserid=' + uid + '&password=' + password + '&sessionid=' + sid,
+      success: callback
+    });
+}
+
+
 // Startup stuff for various pages
 
 $(function() {  
@@ -81,7 +92,23 @@ $("#recoverpassword").click(function() {
   return false;
   });
 
-});  
+$("#resetpassword").click(function() {
+  // This needs to also check for case, numbers, and special characters
+	var pwd1 = $('#passworda').val();
+  var pwd2 = $('#passwordb').val();
+  if( pwd1.length < 8 ) {
+  	if( pwd1 == pwd2 ) {
+  		reset_pass ( QueryString.uid, CryptoJS.SHA512(pwd1), QueryString.sid, function () { window.location.replace("passwordset"); });
+  	}else{
+  		$("#error_message").text("Passwords don't match");
+  	}
+	}else{
+  	$("#error_message").text("Password isn't long enough");
+  }
+  return false;
+  });
+});
+ 
 
 // Helpers
 

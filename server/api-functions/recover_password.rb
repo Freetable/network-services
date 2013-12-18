@@ -42,14 +42,14 @@ post '/api/recover_password' do
  					We received a password reset request for your FreeTable account. To reset your password, use the links below:
 
 					Reset your password using a web browser:
-					https://#{PUBLIC_URL_RR}/reset_password?uid=#{uid}&sid=#{sid}
+					https://#{PUBLIC_URL_RR}/resetpassword?uid=#{uid}&sid=#{sid}
 
 					If you didn't request a password reset, you can ignore this message and your password will not be changed -- someone probably typed in your username or email address by accident.",  
     :html		=> "<html><h1>Hi <strong>#{first} #{last}</strong></h1><br />
     				<p>We received a password reset request for your FreeTable account. To reset your password, use the links below:</p><br />
 
 					<p><b>Reset your password using a web browser:</b></p>
-					<p><a href='https://#{PUBLIC_URL_RR}/reset_password?uid=#{uid}&sid=#{sid}'>Click Here</a></p><br />
+					<p><a href='https://#{PUBLIC_URL_RR}/resetpassword?uid=#{uid}&sid=#{sid}'>Click Here</a></p><br />
 
 					<p>If you didn't request a password reset, you can ignore this message and your password will not be changed -- someone probably typed in your username or email address by accident.</p></html>",
     :from_email => "recovery@freetable.info"  
