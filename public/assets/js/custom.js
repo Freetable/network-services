@@ -69,15 +69,17 @@ $("#signup").click(function() {
 	});
 
 $("#forgot").click(function() {
-  forgot_pass( $('#nickname').val(), function( data ) {  
-    data = data.shift();
-    if (typeof data[''] != 'undefined') {
-      $.cookie('WWUSERID', data['WWUSERID'], { expires: 30 });
-      $.cookie('sessionid', data['sessionid'], { expires: 30 });
-      window.location.replace("forgotsent");
-    }else{ $('#error_message').text('Sign In Error'); }
-
+  window.location.assign("forgot");
   return false;
   });
+
+$("#recoverpassword").click(function() {
+  //window.location.replace("forgot");
+	forgot_pass ( $('#nickname').val(), function () { 
+	window.location.replace("forgotsent");
+	});
+  return false;
+  });
+
 });  
 
