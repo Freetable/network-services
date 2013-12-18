@@ -96,7 +96,7 @@ $("#resetpassword").click(function() {
   // This needs to also check for case, numbers, and special characters
 	var pwd1 = $('#passworda').val();
   var pwd2 = $('#passwordb').val();
-  if( pwd1.length < 8 ) {
+  if( pwd1.length >= 8 ) {
   	if( pwd1 == pwd2 ) {
   		reset_pass ( QueryString.uid, CryptoJS.SHA512(pwd1), QueryString.sid, function () { window.location.replace("passwordset"); });
   	}else{

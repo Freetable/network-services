@@ -3,10 +3,13 @@
 # General
 
 # Requests that we want locked though our CDN 
-PUBLIC_URL    = 'gatekeeper.freetable.info'
+#PUBLIC_URL    = 'gatekeeper.freetable.info'
 
 # Requests outside of our load balancing ( Round robin against the public nodes )
-PUBLIC_URL_RR = 'gatekeepers.freetable.info'
+#PUBLIC_URL_RR = 'gatekeepers.freetable.info'
+
+PUBLIC_URL = 'sinatra.freetable.info'
+PUBLIC_URL_RR = 'sinatra.freetable.info'
 
 # Database Socket
 HOST_POOL = 'localhost'
