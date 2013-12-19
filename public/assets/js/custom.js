@@ -56,10 +56,21 @@ function reset_pass ( uid, password, sid, callback ){
     });
 }
 
+function logout ( uid, callback ){
+    $.ajax({
+      type: "POST",
+      url: "./api/logout",
+      dataType: "json",
+      data: 'wwuserid=' + uid,
+      success: callback
+    });
+}
+
 
 // Startup stuff for various pages
 
 $(function() {  
+
 // Main signin button
 	$("#signin").click(function() {  
     login( $('#nickname').val(), CryptoJS.SHA512($('#password').val()), function( data ) {  
@@ -108,10 +119,10 @@ $("#resetpassword").click(function() {
   return false;
   });
 
-
-
-
-
+  $("#logoutbutton").click(function() {
+    logout( $.cookie('WWUSERID'), function( ) { window.location.replace("./"); });
+    return false;
+  });
 
 
 }); //End jQuery on document ready
