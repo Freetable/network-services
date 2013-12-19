@@ -1,3 +1,3 @@
 #!/bin/bash
-./puma 
+./puma -e development --preload
 

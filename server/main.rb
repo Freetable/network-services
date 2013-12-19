@@ -32,7 +32,15 @@ require_relative('conf')
 # Dynamic loader, anything in api-functions will be dynamically loaded inline at runtime 
 Dir.foreach("api-functions") {|s| require_relative("api-functions/"+s) if s !~ /^\./ }
 
+configure :development do
+get '/api/admin/reload' do
+  logger.info 'Reloading functions' 
+	Dir.foreach("api-functions") {|s| require_relative("api-functions/"+s) if s !~ /^\./ }
+end
+end
+
 # Catch all for what doesn't get caught first
 get '*' do
 	redirect to('/')
 end
+
