@@ -22,6 +22,7 @@ source get_model.sql;
 source get_playlist.sql;
 source get_playlists.sql;
 source get_sprite.sql;
+source invalidate_user.sql;
 source move_file_playlist.sql;
 source move_file.sql;
 source query_user.sql;
