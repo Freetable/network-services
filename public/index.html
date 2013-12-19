@@ -6,12 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Freetable Signin</title>
+<title>Welcome To Freetable</title>
 <link rel="stylesheet" href="/assets/css/font-awesome.min.css"> 
 <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <link href="/assets/css/bootstrap.css" rel="stylesheet">
  
 <link href="/assets/css/signin.css" rel="stylesheet">
+    <script src="/assets/js/sha512.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/assets/js/jquery.cookie.js"></script> 
+    <script src="/assets/js/bootstrap.min.js"></script> 
+    <script src="/assets/js/custom.js"></script> 
+    <!-- When we are in production, we use this line, in development, not so much yet -->
+		<script>login_verify_user();</script>
  
 <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
  
@@ -33,21 +40,9 @@
 <button id="signin" class="btn btn-primary btn-block" type="submit">Login</button>
 </div>
 <div class="col-md-12">&nbsp;</div>
-<div class="col-md-5">
-<button id="signup" class="btn btn-primary btn-block" type="submit">Sign Up</button>
-</div>
-<div class="col-md-7">
-<button id="forgot" class="btn btn-primary btn-block" type="submit">Forgot Password</button>
-</div>
+<div class="col-md-12"><button id="signup" class="btn btn-primary btn-block" type="submit">Join Freetable</button></div>
+<div class="col-md-12"><button id="forgot" class="btn btn-primary btn-block" type="submit">Forgot Password</button></div>
 </form>
 </div>  
-    <script src="/assets/js/sha512.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/assets/js/jquery.cookie.js"></script> 
-    <script src="/assets/js/bootstrap.min.js"></script> 
-    <script src="/assets/js/custom.js"></script> 
-
-    <!-- When we are in production, we use this line, in development, not so much yet -->
-		<!-- <script>login_verify_user();</script> -->
 </body>
 </html>
