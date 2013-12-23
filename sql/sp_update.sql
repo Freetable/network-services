@@ -23,6 +23,7 @@ source invalidate_user.sql;
 source move_file_playlist.sql;
 source move_file.sql;
 source query_user.sql;
+source recover_password.sql;
 source rename_playlist.sql;
 source set_avatar.sql;
 source set_current_playlist.sql;
