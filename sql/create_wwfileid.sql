@@ -9,7 +9,7 @@ CREATE PROCEDURE create_wwfileid ()
 	SET @uuid = (SELECT UUID());
   SET @sid = (SELECT UUID());
 
-	INSERT INTO users SET WWFILEID = @uuid, random_hash = @sid;
+	INSERT INTO files SET WWFILEID = @uuid, random_hash = @sid;
 	
 	SELECT @uuid, @sid;
 
