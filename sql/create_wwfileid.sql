@@ -11,7 +11,7 @@ CREATE PROCEDURE create_wwfileid ()
 
 	INSERT INTO files SET WWFILEID = @uuid, random_hash = @sid;
 	
-	SELECT @uuid, @sid;
+	SELECT @uuid AS 'WWFILEID', @sid AS 'sid';
 
   END$$
   

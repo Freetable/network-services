@@ -39,4 +39,7 @@ source set_user_nickname.sql;
 source set_user_short_descr.sql;
 source user_played.sql;
 source validate_user.sql;
+source verify_file_md5.sql;
+source verify_file_sha1.sql;
+source verify_file_sha512.sql;
 source verify_user.sql;
