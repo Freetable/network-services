@@ -7,7 +7,7 @@ BEGIN
   IF (SELECT 1 FROM files WHERE md5=hash) = 1 THEN 
   SELECT WWFILEID FROM files WHERE md5=hash;
   ELSE
-  SELECT '0';
+  SELECT '-1' AS 'WWFILEID';
   END IF;
   
 END$$
