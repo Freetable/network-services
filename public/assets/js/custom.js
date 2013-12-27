@@ -1,4 +1,7 @@
 // Freetable custom.js
+function wwuserid(){ return $.cookie('WWUSERID'); }
+
+function sessionid(){ return $.cookie('sessionid'); }
 
 function login_verify_user(){
       real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
