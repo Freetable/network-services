@@ -1,6 +1,6 @@
-post '/api/verify_user' do
+get '/api/verify_user.pls' do
   response.headers["Access-Control-Allow-Origin"] = "*"
-  response.headers["Access-Control-Allow-Methods"] = "POST"
+  response.headers["Access-Control-Allow-Methods"] = "GET"
   cache_control :public, :max_age => 60
   etag ''
   my_fields = [ 'wwuserid', 'sessionid' ]
