@@ -4,9 +4,10 @@
 post '/api/recover_password' do
   my_fields = [ 'nick_or_email' ]
   values = []
+  fail = false
+  my_fields.each { |field| if(params[field].nil?); fail = true; break; end; values.push(params[field]) }
+  return ['-0'=>'-0'].to_json if fail
   
-	my_fields.each { |field| return false if (params[field].nil?) ; values.push(params[field]) }
-
 	# Leave all the hard logic to SQL :)
 	row = query_db('recover_password', values ).shift
 	
