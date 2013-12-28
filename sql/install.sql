@@ -14,6 +14,7 @@ source delete_file_from_playlist.sql;
 source delete_playlist.sql;
 source delete_server_from_file_list.sql;
 source delete_user.sql;
+source does_user_exist.sql;
 source get_avatar.sql;
 source get_current_file.sql;
 source get_file_info.sql;
