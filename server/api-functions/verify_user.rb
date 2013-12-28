@@ -3,6 +3,7 @@ get '/api/verify_user.pls' do
   response.headers["Access-Control-Allow-Methods"] = "GET"
   cache_control :public, :max_age => 60
   etag ''
+
   my_fields = [ 'wwuserid', 'sessionid' ]
   values = []
   my_fields.each { |field| return '-0' if(params[field].nil?) ; values.push(params[field]) }

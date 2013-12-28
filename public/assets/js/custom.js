@@ -21,12 +21,12 @@ function verify_user(){
 
 function real_verify_user( uid, sid, callback ){ 
     $.ajax({
-      type: "POST",
-      url: "./api/verify_user",
+      type: "GET",
+      url: "./api/verify_user.pls",
       dataType: "json",
-      data: 'wwuserid='+ uid + '&sessionid=' + sid,
+      data: { wwuserid: uid, sessionid: sid },
       success: callback
-		});
+	});
 }
 
 function login ( nickname, password, callback ){
