@@ -1,5 +1,3 @@
--- MUST WRITE LOCK USERS BEFORE ISSUING THIS COMMAND!
-
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS create_wwuserid$$
@@ -12,7 +10,7 @@ CREATE PROCEDURE create_wwuserid ()
 
 	INSERT INTO users SET WWUSERID = @uuid, sessionid = @sid, join_date = NOW();
 	
-	SELECT @uuid, @sid;
+	SELECT @uuid as 'uid', @sid as 'sid';
  
   END$$
   

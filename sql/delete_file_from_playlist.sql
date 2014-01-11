@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS delete_file_from_playlist$$
-CREATE PROCEDURE delete_file_from_playlist (uid CHAR(128), ssessionid CHAR(128), fid CHAR(128))
+CREATE PROCEDURE delete_file_from_playlist (uid CHAR(36), ssessionid CHAR(36), fid CHAR(36))
 BEGIN
 SET @valid = (SELECT COUNT(*) FROM users WHERE WWUSERID = uid AND sessionid = ssessionid);
 IF @valid > 0 THEN

@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS add_file_to_playlist$$
-CREATE PROCEDURE add_file_to_playlist (uid CHAR(128), ssessionid CHAR(128), fid CHAR(128), fn INT UNSIGNED)
+CREATE PROCEDURE add_file_to_playlist (uid CHAR(36), ssessionid CHAR(36), fid CHAR(36), fn INT UNSIGNED)
 BEGIN
 SET @valid = ( SELECT COUNT(*) FROM users WHERE WWUSERID = uid AND sessionid = ssessionid);
 IF @valid > 0 THEN

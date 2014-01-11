@@ -13,7 +13,7 @@ USE `Freetable` ;
 DROP TABLE IF EXISTS `Freetable`.`users` ;
 
 CREATE TABLE IF NOT EXISTS `Freetable`.`users` (
-  `WWUSERID` CHAR(128) NOT NULL ,
+  `WWUSERID` CHAR(36) NOT NULL ,
   `join_date` DATE NOT NULL ,
   `email` VARCHAR(96) NOT NULL DEFAULT '' ,
   `email_public` BOOL DEFAULT FALSE,
@@ -45,7 +45,7 @@ DROP TABLE IF EXISTS `Freetable`.`users_to_urls` ;
 
 CREATE TABLE IF NOT EXISTS `Freetable`.`users_to_urls` (
 	`URLID` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `WWUSERID` CHAR(128) NOT NULL ,
+  `WWUSERID` CHAR(36) NOT NULL ,
   `icon` VARCHAR(384) NOT NULL ,
   `link` VARCHAR(384) NOT NULL ,
   PRIMARY KEY (`URLID`,`WWUSERID`) ,
@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS `Freetable`.`users_favorites` ;
 
 CREATE TABLE IF NOT EXISTS `Freetable`.`users_favorites` (
 	`URLID` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `WWUSERID` CHAR(128) NOT NULL ,
+  `WWUSERID` CHAR(36) NOT NULL ,
   `url` VARCHAR(384) NOT NULL ,
   PRIMARY KEY (`URLID`, `WWUSERID`) ,
   FOREIGN KEY (`WWUSERID`) REFERENCES `Freetable`.`users` (`WWUSERID`) )
@@ -73,7 +73,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Freetable`.`files` ;
 
 CREATE TABLE IF NOT EXISTS `Freetable`.`files` (
-  `WWFILEID` CHAR(128) NOT NULL ,
+  `WWFILEID` CHAR(36) NOT NULL ,
   `random_hash` CHAR(128) NOT NULL , 
   `title` VARCHAR(256) NOT NULL DEFAULT 'Unknown' ,
   `artist` VARCHAR(256) NOT NULL DEFAULT 'Unknown' ,
@@ -110,8 +110,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Freetable`.`playlists` ;
 
 CREATE  TABLE IF NOT EXISTS `Freetable`.`playlists` (
-  `WWFILEID` CHAR(128) NOT NULL ,
-  `WWUSERID` CHAR(128) NOT NULL ,
+  `WWFILEID` CHAR(36) NOT NULL ,
+  `WWUSERID` CHAR(36) NOT NULL ,
   `playlist_number` INT UNSIGNED NOT NULL ,
   `order_number` INT NOT NULL ,
   `tmp_order_number` INT NOT NULL ,
@@ -131,7 +131,7 @@ CREATE  TABLE IF NOT EXISTS `Freetable`.`playlist_to_name` (
   `PLUID` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `playlist_number` INT UNSIGNED NOT NULL ,
   `playlist_name` VARCHAR(64) NOT NULL ,
-  `WWUSERID` CHAR(128) NOT NULL ,
+  `WWUSERID` CHAR(36) NOT NULL ,
   PRIMARY KEY (`PLUID`, `WWUSERID`, `playlist_number`) ,
   FOREIGN KEY (`WWUSERID`) REFERENCES `Freetable`.`users` (`WWUSERID`) )
 ENGINE = InnoDB;
@@ -143,7 +143,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Freetable`.`file_to_servers` ;
 
 CREATE  TABLE IF NOT EXISTS `Freetable`.`file_to_servers` (
-  `WWFILEID` CHAR(128) NOT NULL ,
+  `WWFILEID` CHAR(36) NOT NULL ,
   `url` VARCHAR(384) NOT NULL ,
   `last_verified` DATETIME ,
   `surrogate_key` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ,
@@ -158,7 +158,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Freetable`.`servers` ;
 
 CREATE  TABLE IF NOT EXISTS `Freetable`.`servers` (
-  `WWSERVERID` CHAR(128) NOT NULL ,
+  `WWSERVERID` CHAR(36) NOT NULL ,
   `name` VARCHAR(384) NOT NULL ,
   `description` VARCHAR(1024) NOT NULL ,
   `url` VARCHAR(384) NOT NULL ,
@@ -173,7 +173,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Freetable`.`users_current_playlist` ;
 
 CREATE  TABLE IF NOT EXISTS `Freetable`.`users_current_playlist` (
-  `WWUSERID` CHAR(128) NOT NULL ,
+  `WWUSERID` CHAR(36) NOT NULL ,
   `playlist_number` INT UNSIGNED NULL ,
   PRIMARY KEY (`WWUSERID`) ,
   FOREIGN KEY (`WWUSERID`) REFERENCES `Freetable`.`users` (`WWUSERID`) )

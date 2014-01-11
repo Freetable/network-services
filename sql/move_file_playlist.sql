@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS move_file_playlist$$
-CREATE PROCEDURE move_file_playlist (uid CHAR(128), ssessionid CHAR(128), fid CHAR(128), pl_from INT UNSIGNED, pl_to INT UNSIGNED)
+CREATE PROCEDURE move_file_playlist (uid CHAR(36), ssessionid CHAR(36), fid CHAR(36), pl_from INT UNSIGNED, pl_to INT UNSIGNED)
 BEGIN
 SET @valid = (SELECT COUNT(*) FROM users WHERE WWUSERID = uid AND sessionid = ssessionid);
 IF @valid > 0 THEN

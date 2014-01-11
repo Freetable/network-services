@@ -14,7 +14,7 @@ BEGIN
     UPDATE users SET sessionid = UUID() WHERE nickname = nnickname;
     SELECT WWUSERID, sessionid FROM users WHERE nickname = nnickname;
   ELSE
-    SELECT '-1';
+    SELECT '0' as WWUSERID;
   END IF;
   
 END$$

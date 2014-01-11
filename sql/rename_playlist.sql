@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS rename_playlist$$
-CREATE PROCEDURE rename_playlist (uid CHAR(128), ssessionid CHAR(128), pplaylist_number INT UNSIGNED, pplaylist_name VARCHAR(64))
+CREATE PROCEDURE rename_playlist (uid CHAR(36), ssessionid CHAR(36), pplaylist_number INT UNSIGNED, pplaylist_name VARCHAR(64))
 BEGIN
 
 SET @valid = (SELECT COUNT(*) FROM users WHERE WWUSERID = uid AND sessionid = ssessionid);

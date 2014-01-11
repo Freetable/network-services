@@ -1,7 +1,7 @@
 DELIMITER $$
 
 DROP PROCEDURE IF EXISTS create_playlist$$
-CREATE PROCEDURE create_playlist (uid CHAR(128), ssessionid CHAR(128), pplaylist_name VARCHAR(64))
+CREATE PROCEDURE create_playlist (uid CHAR(36), ssessionid CHAR(36), pplaylist_name VARCHAR(64))
 BEGIN
 
 SET @valid = (SELECT COUNT(*) FROM users WHERE WWUSERID = uid AND sessionid = ssessionid);

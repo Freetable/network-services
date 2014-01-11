@@ -1,6 +1,6 @@
 DELIMITER $$
 DROP PROCEDURE IF EXISTS user_played$$
-CREATE PROCEDURE user_played(uid CHAR(128))
+CREATE PROCEDURE user_played(uid CHAR(36))
   BEGIN
     SET @playlist_number = ( SELECT playlist_number FROM users_current_playlist WHERE WWUSERID = uid );
     SET @order_number = ( SELECT MAX(order_number) FROM playlists WHERE WWUSERID = uid AND playlist_number = @playlist_number );
