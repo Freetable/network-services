@@ -6,7 +6,7 @@ function login_verify_user(){
   real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
     data = data.shift();
     console.log(data);
-    if( typeof data['result'] == '1' ) { window.location.replace("/main"); }
+    if( data['result'] == '1' ) { window.location.replace("/main"); }
   });
 }
 
@@ -14,7 +14,7 @@ function verify_user(){
   real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
     data = data.shift();
     console.log(data);
-    if( typeof data['result'] == '0' ) { window.location.replace("/"); }
+    if( data['result'] == '0' ) { window.location.replace("/"); }
   }); 
 }
 
@@ -84,7 +84,7 @@ $(function() {
   $("#signin").click(function() {  
     login( $('#nickname').val(), CryptoJS.SHA512($('#password').val()), function( data ) {  
     data = data.shift();
-    if (typeof data['WWUSERID'] != 'undefined') {
+    if (data['WWUSERID'] != '0') {
       $.cookie('WWUSERID', data['WWUSERID'], { expires: 30 });
       $.cookie('sessionid', data['sessionid'], { expires: 30 });
       window.location.replace("main");
