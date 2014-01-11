@@ -32,7 +32,8 @@
 </div>
 
 </div>
-<div class="container well col-md-8 col-md-offset-2">&nbsp;</div>
+<div id="server_list" class="container well col-md-8 col-md-offset-2">
+</div>
 
 </div>  
 	<script src="/assets/js/sha512.js"></script>
@@ -41,5 +42,17 @@
 	<script src="./assets/js/bootstrap.min.js"></script> 
 	<script src="./assets/js/custom.js"></script> 
 	<script src="./assets/js/pageauth.js"></script>
+<script>
+$(function() {
+
+	$('#server_list').append('<a href="http://icarus-freetable.rhcloud.com/api/connect/'+wwuserid()+'/'+sessionid()+'" class="btn btn-block btn-xs btn-success">Icarus @ Openshift ( Alpha )</a>');
+$('#server_list').append('<a href="#" class="btn btn-block btn-xs btn-info" disabled="disabled">Coming Soon</a>');
+$('#server_list').append('<a href="#" class="btn btn-block btn-xs btn-info" disabled="disabled">Coming Soon</a>');
+$('#server_list').append('<a href="#" class="btn btn-block btn-xs btn-info" disabled="disabled">Coming Soon</a>');
+$('#server_list').append('<a href="#" class="btn btn-block btn-xs btn-info" disabled="disabled">Coming Soon</a>');
+$('#server_list').append('<a href="#" class="btn btn-block btn-xs btn-info" disabled="disabled">Coming Soon</a>');
+
+});
+</script>
 </body>
 </html>
