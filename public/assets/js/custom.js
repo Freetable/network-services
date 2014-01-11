@@ -6,7 +6,7 @@ function login_verify_user(){
   real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
     data = data.shift();
     console.log(data);
-    if( typeof data['1'] != 'undefined' ) { window.location.replace("/main"); }
+    if( typeof data['result'] == '1' ) { window.location.replace("/main"); }
   });
 }
 
@@ -14,7 +14,7 @@ function verify_user(){
   real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
     data = data.shift();
     console.log(data);
-    if( typeof data['1'] == 'undefined' ) { window.location.replace("/"); }
+    if( typeof data['result'] == '0' ) { window.location.replace("/"); }
   }); 
 }
 
