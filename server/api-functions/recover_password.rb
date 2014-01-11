@@ -2,30 +2,30 @@
 # nick_or_email in
 # bool out
 post '/api/recover_password' do
-  my_fields = [ 'nick_or_email' ]
+  my_fields = ['nick_or_email']
   values = []
   fail = false
   my_fields.each { |field| if(params[field].nil?); fail = true; break; end; values.push(params[field]) }
-  return ['-0'=>'-0'].to_json if fail
+  return FUNCTIONFAIL if fail
   
-	# Leave all the hard logic to SQL :)
-	row = query_db('recover_password', values ).shift
+  # Leave all the hard logic to SQL :)
+  row = query_db('recover_password', values ).shift
 	
   uid, sid, first, last, email = ''
   client_ip = request.ip
 
   if(!row.nil?)
-  	uid 	= row['WWUSERID'];
-  	sid 	= row['sessionid'];
-  	first = row['first_name'];
-  	last  = row['last_name'];
-  	email = row['email'];
+  	uid   = row['WWUSERID']
+  	sid   = row['sessionid']
+  	first = row['first_name']
+  	last  = row['last_name']
+  	email = row['email']
   else
-  	return ("-0".to_json);
-	end
+  	return FUNCTIONFAIL
+  end
 
   # Validate
-	return ("-0".to_json) if email.nil?
+  return FUNCTIONFAIL if email.nil?
 
   #TO-DO
   # DONE PUBLIC_URL_RR This will always be gatekeeper.freetable.info BUT it should be a constant so => server_url	= get_serverurl();  -- from db config table
@@ -34,10 +34,9 @@ post '/api/recover_password' do
 
   m = Mandrill::API.new MANDRILL_APIKEY
   message = {
-    :subject		=> "Password Reset on FreeTable",  
-    :from_name	=> "FreeTable",     
-		:to 				=> [{:email	=> email, :name => "#{first} #{last}"}],  
- 
+    :subject   => "Password Reset on FreeTable",  
+    :from_name => "FreeTable",     
+	:to        => [{:email => email, :name => "#{first} #{last}"}],  
     :text		=> "Hi #{first} #{last},
 
  					We received a password reset request for your FreeTable account. To reset your password, use the links below:
@@ -60,5 +59,5 @@ post '/api/recover_password' do
 
   #TO-DO
   # Done, mandrill does this transparently for us => logging for email fails/success -- maybe tracking these submissions?
-  return("1".to_json)
+  return RETURNSUCCESS
 end
