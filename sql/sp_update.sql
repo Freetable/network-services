@@ -1,4 +1,4 @@
-#CREATE DATABASE IF NOT EXISTS Freetable DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+-- CREATE DATABASE IF NOT EXISTS Freetable DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 
 source add_file_to_network.sql;
 source add_file_to_playlist.sql;
