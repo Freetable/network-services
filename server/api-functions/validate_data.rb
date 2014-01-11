@@ -2,7 +2,7 @@ def validate( values, types )
 	fail = false
 	bake = []
 	(0..values.length).each do |c|
-	bake.push([values[c], types[c])
+	bake.push([values[c], types[c]])
 	end
 
 	bake.each do |myeval|
