@@ -20,6 +20,11 @@ require 'mandrill'
 # Conf import
 require_relative('conf')
 
+FUNCTIONFAIL  = '{"result": "-0"}'
+RETURNFAIL    = '{"result": "0"}'
+RETURNSUCCESS = '{"result": "1"}'
+
+
 # Setup a database connection pool
 @@dbh_pool = ConnectionPool.new( :size => 4 ) { Mysql2::Client.new(	:host      => HOST_POOL, 
 									:database  => DB_NAME, 
