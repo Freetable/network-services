@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/Freetable/ft-common.git
-  revision: 1f29c3b71e552233b3439a3fb9640d7b68c9c0ef
+  revision: 3966a0a2e8827a47bbb5977a97a32f7a22930225
   specs:
-    ft-common (0.0.1)
+    ft-common (0.0.3)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    backports (3.3.5)
+    backports (3.4.0)
     connection_pool (1.2.0)
     excon (0.31.0)
     ffi2-generators (0.1.1)
@@ -21,7 +21,7 @@ GEM
     mandrill-api (1.0.49)
       excon (>= 0.16.0, < 1.0)
       json (>= 1.7.7, < 2.0)
-    multi_json (1.8.2)
+    multi_json (1.8.4)
     mysql2 (0.3.14)
     puma (2.7.1)
       rack (>= 1.1, < 2.0)
@@ -135,7 +135,7 @@ GEM
     rubysl-coverage (2.0.3)
     rubysl-csv (2.0.2)
       rubysl-english (~> 2.0)
-    rubysl-curses (2.0.0)
+    rubysl-curses (2.0.1)
     rubysl-date (2.0.6)
     rubysl-delegate (2.0.1)
     rubysl-digest (2.0.3)
@@ -189,7 +189,7 @@ GEM
     rubysl-observer (2.0.0)
     rubysl-open-uri (2.0.0)
     rubysl-open3 (2.0.0)
-    rubysl-openssl (2.0.5)
+    rubysl-openssl (2.0.6)
     rubysl-optparse (2.0.1)
       rubysl-shellwords (~> 2.0)
     rubysl-ostruct (2.0.4)
