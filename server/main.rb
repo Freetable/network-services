@@ -8,8 +8,6 @@
 
 require_relative('conf')
 
-include Freetable
-
 # Setup a database connection pool
 @@dbh_pool = ConnectionPool.new( :size => 4 ) { Mysql2::Client.new(	:host      => HOST_POOL, 
 									:database  => DB_NAME, 
