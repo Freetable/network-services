@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/Freetable/ft-common.git
-  revision: 3966a0a2e8827a47bbb5977a97a32f7a22930225
+  revision: f7b7814c4cfb1204d9bd531c6a204ec6cf6c9366
   specs:
-    ft-common (0.0.3)
+    ft-common (0.0.6)
 
 GEM
   remote: https://rubygems.org/

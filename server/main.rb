@@ -18,7 +18,7 @@ require_relative('conf')
 									:encoding  => 'utf8' ) }
 
 # Dynamic loader, anything in api-functions will be dynamically loaded inline at runtime 
-# Dir.foreach("api-functions") {|s| require_relative("api-functions/"+s) if s !~ /^\./ }
+Dir.foreach("api-functions") {|s| require_relative("api-functions/"+s) if s !~ /^\./ }
 
 configure :development do
   get '/api/admin/reload' do
