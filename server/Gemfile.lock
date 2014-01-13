@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/Freetable/ft-common.git
+  revision: 1f29c3b71e552233b3439a3fb9640d7b68c9c0ef
+  specs:
+    ft-common (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -247,6 +253,7 @@ PLATFORMS
 
 DEPENDENCIES
   connection_pool
+  ft-common!
   json
   mandrill
   mandrill-api
