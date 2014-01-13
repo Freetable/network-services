@@ -1,4 +1,3 @@
-# 
 post '/api/create_user' do
 	#TO-DO 1
 	# => call create_wwuserid()

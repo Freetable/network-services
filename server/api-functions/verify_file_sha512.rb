@@ -1,9 +1,13 @@
 post '/api/verify_file_sha512' do
-  my_fields = [ 'hash' ]
-  values = []
-  fail = false
-  my_fields.each { |field| if(params[field].nil?); fail = true; break; end; values.push(params[field]) }
-  return Freetable::FUNCTIONFAIL if fail
-  query_db('verify_file_sha512', values).to_json
+  fields 	= [ 'hash' ]
+	types		= [ 'sha512' ]
+
+  values 	= check_and_stack(fields, params, types)
+
+  if(values.nil?) 
+    return Freetable::FUNCTIONFAIL
+  else
+  	query_db('verify_file_sha512', values).to_json
+	end
 end
 

@@ -4,10 +4,10 @@ get '/api/verify_user.pls' do
 #  cache_control :public, :max_age => 60
   etag ''
 
-  fields = [ 'wwuserid', 'sessionid' ]
-  types = [ 'uuid', 'uuid' ]
+  fields 	= [ 'wwuserid', 'sessionid' ]
+  types 	= [ 'uuid', 'uuid' ]
   
-  values = check_and_stack(fields, params, types)
+  values 	= check_and_stack(fields, params, types)
 
   if(values.nil?) 
     return Freetable::FUNCTIONFAIL

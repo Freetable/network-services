@@ -1,9 +1,13 @@
 post '/api/add_file_to_playlist' do
-  my_fields = [ 'wwuserid', 'sessionid', 'wwfileid', 'file_network' ]
-  values = []
-  fail = false
-  my_fields.each { |field| if(params[field].nil?); fail = true; break; end; values.push(params[field]) }
-  return Freetable::FUNCTIONFAIL if fail
-  query_db('add_file_to_playlist', values).to_json
+  fields 	= [ 'wwuserid', 'sessionid', 'wwfileid', 'file_network' ]
+	types 	= [ 'uuid', 'uuid', 'uuid', 'integer' ]
+
+  values 	= check_and_stack(fields, params, types)
+  
+	if(values.nil?) 
+    return Freetable::FUNCTIONFAIL
+  else
+		query_db('add_file_to_playlist', values).to_json
+	end
 end
 
