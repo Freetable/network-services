@@ -10,7 +10,7 @@ get '/api/verify_user.pls' do
   values = check_and_stack(fields, params, types)
 
   if(values.nil?) 
-    return Freetable::FUNCTIONFAIL if fail
+    return FUNCTIONFAIL if fail
   else
     query_db('verify_user', values).to_json	
   end

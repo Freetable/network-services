@@ -6,8 +6,9 @@
 #
 ###############################################################################
 
-# Conf import
 require_relative('conf')
+
+include Freetable
 
 # Setup a database connection pool
 @@dbh_pool = ConnectionPool.new( :size => 4 ) { Mysql2::Client.new(	:host      => HOST_POOL, 
@@ -19,17 +20,17 @@ require_relative('conf')
 									:encoding  => 'utf8' ) }
 
 # Dynamic loader, anything in api-functions will be dynamically loaded inline at runtime 
-Dir.foreach("api-functions") {|s| require_relative("api-functions/"+s) if s !~ /^\./ }
+# Dir.foreach("api-functions") {|s| require_relative("api-functions/"+s) if s !~ /^\./ }
 
 configure :development do
-get '/api/admin/reload' do
-  logger.info 'Reloading functions' 
+  get '/api/admin/reload' do
+    logger.info 'Reloading functions' 
 	Dir.foreach("api-functions") {|s| require_relative("api-functions/"+s) if s !~ /^\./ }
-end
+  end
 end
 
 # Catch all for what doesn't get caught first
 get '*' do
-	redirect to('/')
+  redirect to('/')
 end
 
