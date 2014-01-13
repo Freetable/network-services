@@ -4,11 +4,16 @@ get '/api/verify_user.pls' do
 #  cache_control :public, :max_age => 60
   etag ''
 
-  my_fields = [ 'wwuserid', 'sessionid' ]
-  values = []
-  fail = false
-  my_fields.each { |field| if(params[field].nil?); fail = true; break; end; values.push(params[field]) }
-  return Freetable::FUNCTIONFAIL if fail
-  query_db('verify_user', values).to_json
+  fields = [ 'wwuserid', 'sessionid' ]
+  types = [ 'uuid', 'uuid' ]
+  
+  values = check_and_stack(fields, params, types)
+
+  if(values.nil?) {
+    return Freetable::FUNCTIONFAIL if fail
+  }else{
+    query_db('verify_user', values).to_json	
+  }
+
 end
 
