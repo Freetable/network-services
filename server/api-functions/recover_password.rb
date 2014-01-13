@@ -6,7 +6,7 @@ post '/api/recover_password' do
   values = []
   fail = false
   my_fields.each { |field| if(params[field].nil?); fail = true; break; end; values.push(params[field]) }
-  return FUNCTIONFAIL if fail
+  return Freetable::FUNCTIONFAIL if fail
   
   # Leave all the hard logic to SQL :)
   row = query_db('recover_password', values ).shift
@@ -21,11 +21,11 @@ post '/api/recover_password' do
   	last  = row['last_name']
   	email = row['email']
   else
-  	return FUNCTIONFAIL
+  	return Freetable::FUNCTIONFAIL
   end
 
   # Validate
-  return FUNCTIONFAIL if email.nil?
+  return Freetable::FUNCTIONFAIL if email.nil?
 
   #TO-DO
   # DONE PUBLIC_URL_RR This will always be gatekeeper.freetable.info BUT it should be a constant so => server_url	= get_serverurl();  -- from db config table
@@ -59,5 +59,5 @@ post '/api/recover_password' do
 
   #TO-DO
   # Done, mandrill does this transparently for us => logging for email fails/success -- maybe tracking these submissions?
-  return RETURNSUCCESS
+  return Freetable::RETURNSUCCESS
 end

@@ -6,7 +6,7 @@ post '/api/does_user_exist' do
   values = []
   fail = false
   my_fields.each { |field| if(params[field].nil?); fail = true; break; end; values.push(params[field]) }
-  return FUNCTIONFAIL if fail
+  return Freetable::FUNCTIONFAIL if fail
   
   # Leave all the hard logic to SQL :)
   row = query_db('does_user_exist', values ).shift
@@ -18,13 +18,13 @@ post '/api/does_user_exist' do
     nickname = row['nickname'];
   	email    = row['email'];
   else
-  	return FUNCTIONFAIL;
+  	return Freetable::FUNCTIONFAIL;
   end
 
   # Validate
-  return FUNCTIONFAIL if uid.nil?
+  return Freetable::FUNCTIONFAIL if uid.nil?
 
   #TO-DO
   # DONE PUBLIC_URL_RR This will always be gatekeeper.freetable.info BUT it should be a constant so => server_url	= get_serverurl();  -- from db config table
-  return RETURNSUCCESS
+  return Freetable::RETURNSUCCESS
 end
