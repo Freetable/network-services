@@ -6,10 +6,12 @@
 #
 ###############################################################################
 
+set :protection, origin_whitelist: ['chrome-extension://aejoelaoggembcahagimdiliamlcdmfm']
+
 require_relative('conf')
 
 # Setup a database connection pool
-@@dbh_pool = ConnectionPool.new( :size => 4 ) { Mysql2::Client.new(	:host      => HOST_POOL, 
+@@dbh_pool 	= ConnectionPool.new( :size => 4 ) { Mysql2::Client.new(	:host      => HOST_POOL, 
 									:database  => DB_NAME, 
 									:username  => DB_USER, 
 									:password  => DB_PASS, 

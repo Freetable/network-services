@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/Freetable/ft-common.git
-  revision: 72abf5c36e0656598aaeb98f0a6df166fdc465da
+  revision: 29d9f5f215ef9d9d35f80e16d06a4aa35094c6ca
   specs:
-    ft-common (0.0.8)
+    ft-common (0.0.11)
 
 GEM
   remote: https://rubygems.org/
@@ -244,6 +244,8 @@ GEM
       rack-test
       sinatra (~> 1.4.0)
       tilt (~> 1.3)
+    sinatra-logger (0.1.1)
+      sinatra (>= 1.0)
     sinatra-respond_to (0.9.0)
       sinatra (~> 1.3)
     tilt (1.4.1)
@@ -262,4 +264,5 @@ DEPENDENCIES
   rubysl
   sinatra
   sinatra-contrib
+  sinatra-logger
   sinatra-respond_to

@@ -3,7 +3,7 @@
 # wwuserid, sessionid out
 post '/api/login' do
   fields 	= [ 'nickname', 'password' ]
-	types		= [ 'uuid', 'sha512' ]
+	types		= [ 'username', 'sha512' ]
 
   values 	= check_and_stack(fields, params, types)
 

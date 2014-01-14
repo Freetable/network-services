@@ -4,17 +4,24 @@ function sessionid(){ return $.cookie('sessionid'); }
 
 function login_verify_user(){
   real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
-    data = data.shift();
-    console.log(data);
-    if( data['result'] == '1' ) { window.location.replace("/main"); }
+		if((typeof data == 'object')&&('shift' in data)) {
+    	data = data.shift();
+    	//console.log(data['result']);
+    	if( data['result'] == 1 ) { window.location.replace("/main"); }
+		}
   });
 }
 
 function verify_user(){
   real_verify_user( $.cookie('WWUSERID'), $.cookie('sessionid'), function (data) {
-    data = data.shift();
-    console.log(data);
-    if( data['result'] == '0' ) { window.location.replace("/"); }
+		if((typeof data == 'object')&&('shift' in data)) {
+	    data = data.shift();
+	    //console.log(data['result']);
+	    if( data['result'] == 0 ) { window.location.replace("/"); }
+		}else{
+			// If it fails, or we can't figure it out, then get us out of there.
+			window.location.replace("/");
+		}
   }); 
 }
 
@@ -33,17 +40,17 @@ function login ( nickname, password, callback ){
       type: "POST",  
       url: "./api/login", 
       dataType: "json",
-      data: 'nickname='+ nickname + '&password=' + password,  
+      data: { nickname: nickname, password: password },  
 			success: callback
 		});
 }
 
-function logout ( uid, callback ){
+function logout ( uid, sid, callback ){
     $.ajax({
       type: "POST",
       url: "./api/logout",
       dataType: "json",
-      data: 'wwuserid=' + uid,
+      data: { wwuserid: uid, sessionid: sid },
       success: callback
     });
 }
@@ -63,7 +70,7 @@ function reset_pass ( uid, password, sid, callback ){
       type: "POST",
       url: "./api/set_password",
       dataType: "json",
-      data: 'wwuserid=' + uid + '&password=' + password + '&sessionid=' + sid,
+			data: { wwuserid: uid, password: password, sessionid: sid },
       success: callback
     });
 }
@@ -73,7 +80,7 @@ function signup ( nickname, email, callback ) {
       type: "POST",
       url: "./api/does_user_exist",
       dataType: "json",
-      data: 'nickname=' + nickname + '&email=' + email,
+			data: { nickname: nickname, email: email },
       success: callback
     });
 }
@@ -82,11 +89,15 @@ function signup ( nickname, email, callback ) {
 $(function() {  
   // Main signin button
   $("#signin").click(function() {  
-    login( $('#nickname').val(), CryptoJS.SHA512($('#password').val()), function( data ) {  
+  var nickname = $('#nickname').val();
+	var password = CryptoJS.SHA512($('#password').val()).toString(CryptoJS.enc.Hex);  
+	login( nickname, password, function( data ) {  
     data = data.shift();
+		console.log(data);
     if (data['WWUSERID'] != '0') {
       $.cookie('WWUSERID', data['WWUSERID'], { expires: 30 });
       $.cookie('sessionid', data['sessionid'], { expires: 30 });
+			//console.log('signin good');
       window.location.replace("main");
     } else { $('#error_message').text('Sign In Error'); }
         
@@ -144,7 +155,7 @@ $(function() {
   });
 
   $("#logoutbutton").click(function() {
-    logout( $.cookie('WWUSERID'), function( ) { window.location.replace("./"); });
+    logout( wwuserid(), sessionid(), function() { console.log('logging out'); $.cookie('WWUSERID', ''); $.cookie('sessionid', ''); window.location.replace("./"); });
     return false;
   });
 }); //End jQuery on document ready
