@@ -155,7 +155,7 @@ $(function() {
   });
 
   $("#logoutbutton").click(function() {
-    logout( wwuserid(), sessionid(), function() { console.log('logging out'); $.cookie('WWUSERID', ''); $.cookie('sessionid', ''); window.location.replace("./"); });
+    logout( wwuserid(), sessionid(), function() { $.cookie('WWUSERID', ''); $.cookie('sessionid', ''); window.location.replace("./"); });
     return false;
   });
 }); //End jQuery on document ready
